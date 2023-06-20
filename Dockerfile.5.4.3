@@ -1,0 +1,16 @@
+FROM docker.io/ubuntu:jammy-20230605
+ARG ROCMREL="5.4.3"
+ARG INSTREL="amdgpu-install_5.4.50403-1_all.deb"
+ENV HSA_OVERRIDE_GFX_VERSION "10.3.0"
+ENV PYTORCH_CUDA_ALLOC_CONF "backend:cudaMallocAsync"
+ENV DEBIAN_FRONTEND "noninteractive"
+ENV AMDREPO "https://repo.radeon.com"
+RUN apt-get update && apt-get install -y locales wget gnupg2
+RUN localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias \
+    en_US.UTF-8
+ENV LANG en_US.utf8
+RUN wget ${AMDREPO}/amdgpu-install/${ROCMREL}/ubuntu/jammy/${INSTREL}
+RUN apt-get install -y ./${INSTREL} && rm ./${INSTREL}
+RUN apt-get update
+RUN amdgpu-install --no-dkms --usecase=rocm,hiplibsdk,mlsdk,mllib \
+    --rocmrelease=${ROCMREL} -y && rm -rf /var/lib/apt/lists/*
