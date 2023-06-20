@@ -24,6 +24,23 @@ podman run -it --privileged  -v /dev/dri:/dev/dri -v /dev/kfd:/dev/kfd  repo.des
 podman build -t repo.despera.space/iru/rocm:5.2.3-torch-1.13.1 -f torch/Dockerfile.5.2.3 .
 podman run -it --privileged  -v /dev/dri:/dev/dri -v /dev/kfd:/dev/kfd  repo.despera.space/iru/rocm:5.2.3-torch-1.13.1 /bin/bash
 
+# Testing
+
+## ROCm
+
+Run `rocminfo` or `rocm-smi`.
+
+## Torch
+Run Python3.
+
+```python
+import torch
+torch.cuda.is_available()
+torch.cuda.device_count()
+torch.cuda.get_device_name(0)
+````
+
+
 # Why are those so large?
 
 The libraries installed are quite big. I have no idea why
