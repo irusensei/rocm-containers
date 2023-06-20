@@ -27,8 +27,3 @@ podman run -it --privileged  -v /dev/dri:/dev/dri -v /dev/kfd:/dev/kfd  repo.des
 # Why are those so large?
 
 The libraries installed are quite big. I have no idea why
-
-If you want to use this please build the images yourself.
-# Why are those so large?
-
-The libraries installed are quite big. I have no idea why.
