@@ -14,3 +14,4 @@ RUN apt-get install -y ./${INSTREL} && rm ./${INSTREL}
 RUN apt-get update
 RUN amdgpu-install --no-dkms --usecase=rocm,hiplibsdk,mlsdk,mllib \
     --rocmrelease=${ROCMREL} -y && rm -rf /var/lib/apt/lists/*
+RUN apt-get clean

@@ -17,3 +17,4 @@ RUN echo 'deb [arch=amd64] https://repo.radeon.com/rocm/apt/5.2.3 ubuntu \
 RUN apt-get update
 RUN amdgpu-install --no-dkms --usecase=rocm,hiplibsdk,mlsdk,mllib \
     --rocmrelease=${ROCMREL} -y && rm -rf /var/lib/apt/lists/*
+RUN apt-get clean

@@ -18,6 +18,7 @@ RUN echo 'deb [arch=amd64] https://repo.radeon.com/rocm/apt/5.2.3 ubuntu \
 RUN apt-get update
 RUN amdgpu-install --no-dkms --usecase=rocm,hiplibsdk,mlsdk,mllib \
     --rocmrelease=${ROCMREL} -y && rm -rf /var/lib/apt/lists/*
+RUN apt-get clean
 RUN pip install torch==1.13.1+rocm5.2 torchvision==0.14.1+rocm5.2 \
-    torchaudio==0.13.1 --extra-index-url \
+    torchaudio==0.13.1 --extra-index-url --no-cache-dir \
     https://download.pytorch.org/whl/rocm5.2
